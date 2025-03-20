@@ -3,23 +3,28 @@
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
 use crate::dimension::provider::units::display_names::UnitsDisplayNamesV1;
-use crate::dimension::units::formatter::{UnitsFormatter, UnitsFormatterPreferences};
-use crate::dimension::units::options::{UnitsFormatterOptions, Width};
-use crate::duration::options::FieldStyle;
-
-use super::format::FormattedDuration;
-use super::options::BaseStyle;
-use super::validated_options::Unit;
-use super::{provider, Duration};
 
 pub use super::validated_options::ValidatedDurationFormatterOptions;
-use icu_decimal::provider::{DecimalDigitsV1, DecimalSymbolsV1};
-use icu_decimal::{DecimalFormatter, DecimalFormatterPreferences};
+use icu_decimal::{
+    provider::{DecimalDigitsV1, DecimalSymbolsV1},
+    DecimalFormatter, DecimalFormatterPreferences,
+};
 use icu_list::{options::ListLength, ListFormatter, ListFormatterPreferences};
 use icu_locale_core::preferences::{
     define_preferences, extensions::unicode::keywords::NumberingSystem, prefs_convert,
 };
 use icu_provider::prelude::*;
+
+use super::{
+    format::FormattedDuration, options::BaseStyle, provider, validated_options::Unit, Duration,
+};
+use crate::{
+    dimension::units::{
+        formatter::{UnitsFormatter, UnitsFormatterPreferences},
+        options::{UnitsFormatterOptions, Width},
+    },
+    duration::options::FieldStyle,
+};
 
 define_preferences!(
     /// The preferences for duration formatting.
