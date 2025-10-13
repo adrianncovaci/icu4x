@@ -17,15 +17,25 @@
 
 extern crate alloc;
 
+#[cfg(feature = "compactdecimal")]
 pub mod compactdecimal;
+#[cfg(feature = "dimension")]
 pub mod dimension;
+#[cfg(feature = "displaynames")]
 pub mod displaynames;
+#[cfg(feature = "duration")]
 pub mod duration;
+#[cfg(feature = "measure")]
 pub mod measure;
+#[cfg(feature = "personnames")]
 pub mod personnames;
+#[cfg(feature = "relativetime")]
 pub mod relativetime;
+#[cfg(feature = "transliterate")]
 pub mod transliterate;
+#[cfg(feature = "unicodeset_parse")]
 pub mod unicodeset_parse;
+#[cfg(feature = "units")]
 pub mod units;
 
 #[doc(hidden)] // compiled constructors look for the baked provider here
@@ -45,64 +55,131 @@ pub mod provider {
         }
         make_provider!(Baked);
 
+        #[cfg(feature = "compactdecimal")]
         impl_long_compact_decimal_format_data_v1!(Baked);
+        #[cfg(feature = "compactdecimal")]
         impl_short_compact_decimal_format_data_v1!(Baked);
+
+        #[cfg(feature = "dimension")]
         impl_short_currency_compact_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_currency_essentials_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_currency_displayname_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_currency_patterns_data_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_currency_extended_data_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_display_names_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_area_core_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_area_extended_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_area_outlier_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_duration_core_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_duration_extended_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_duration_outlier_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_length_core_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_length_extended_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_length_outlier_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_mass_core_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_mass_extended_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_mass_outlier_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_volume_core_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_volume_extended_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_names_volume_outlier_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_units_essentials_v1!(Baked);
-        impl_language_display_names_v1!(Baked);
-        impl_digital_duration_data_v1!(Baked);
-        impl_locale_display_names_v1!(Baked);
-        impl_region_display_names_v1!(Baked);
-        impl_script_display_names_v1!(Baked);
-        impl_variant_display_names_v1!(Baked);
+        #[cfg(feature = "dimension")]
         impl_percent_essentials_v1!(Baked);
+
+        #[cfg(feature = "displaynames")]
+        impl_language_display_names_v1!(Baked);
+        #[cfg(feature = "displaynames")]
+        impl_locale_display_names_v1!(Baked);
+        #[cfg(feature = "displaynames")]
+        impl_region_display_names_v1!(Baked);
+        #[cfg(feature = "displaynames")]
+        impl_script_display_names_v1!(Baked);
+        #[cfg(feature = "displaynames")]
+        impl_variant_display_names_v1!(Baked);
+
+        #[cfg(feature = "duration")]
+        impl_digital_duration_data_v1!(Baked);
+
+        #[cfg(feature = "personnames")]
         impl_person_names_format_v1!(Baked);
+
+        #[cfg(feature = "relativetime")]
         impl_long_day_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_long_hour_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_long_minute_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_long_month_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_long_quarter_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_long_second_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_long_week_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_long_year_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_narrow_day_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_narrow_hour_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_narrow_minute_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_narrow_month_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_narrow_quarter_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_narrow_second_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_narrow_week_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_narrow_year_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_short_day_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_short_hour_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_short_minute_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_short_month_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_short_quarter_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_short_second_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_short_week_relative_v1!(Baked);
+        #[cfg(feature = "relativetime")]
         impl_short_year_relative_v1!(Baked);
+
+        #[cfg(feature = "transliterate")]
         impl_transliterator_rules_v1!(Baked);
+
+        #[cfg(feature = "units")]
         impl_units_info_v1!(Baked);
+
+        #[cfg(feature = "measure")]
         impl_unit_ids_v1!(Baked);
     };
 

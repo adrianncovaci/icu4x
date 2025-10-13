@@ -145,9 +145,11 @@ use icu_provider as _;
 pub use icu_calendar as calendar;
 
 #[doc(inline)]
+#[cfg(feature = "casemap")]
 pub use icu_casemap as casemap;
 
 #[doc(inline)]
+#[cfg(feature = "collator")]
 pub use icu_collator as collator;
 
 #[doc(inline)]
@@ -175,6 +177,7 @@ pub use icu_properties as properties;
 pub use icu_collections as collections;
 
 #[doc(inline)]
+#[cfg(feature = "segmenter")]
 pub use icu_segmenter as segmenter;
 
 #[doc(inline)]
