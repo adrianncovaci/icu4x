@@ -8,8 +8,9 @@ use crate::cal::Coptic;
 use crate::calendar_arithmetic::{ArithmeticDate, ArithmeticDateBuilder, DateFieldsResolver};
 use crate::error::DateError;
 use crate::options::DateFromFieldsOptions;
+use crate::options::{DateAddOptions, DateDifferenceOptions};
 use crate::types::DateFields;
-use crate::{types, Calendar, Date, DateDuration, DateDurationUnit, RangeError};
+use crate::{types, Calendar, Date, RangeError};
 use calendrical_calculations::rata_die::RataDie;
 use tinystr::tinystr;
 
@@ -97,12 +98,27 @@ impl DateFieldsResolver for Ethiopian {
     ) -> Result<Self::YearInfo, DateError> {
         crate::cal::Coptic::reference_year_from_month_day(month_code, day)
     }
+
+    #[inline]
+    fn ordinal_month_from_code(
+        &self,
+        _year: &Self::YearInfo,
+        month_code: types::MonthCode,
+        _options: DateFromFieldsOptions,
+    ) -> Result<u8, DateError> {
+        match month_code.parsed() {
+            Some((month_number @ 1..=13, false)) => Ok(month_number),
+            _ => Err(DateError::UnknownMonthCode(month_code)),
+        }
+    }
 }
 
 impl crate::cal::scaffold::UnstableSealed for Ethiopian {}
 impl Calendar for Ethiopian {
     type DateInner = EthiopianDateInner;
     type Year = types::EraYear;
+    type DifferenceError = core::convert::Infallible;
+
     fn from_fields(
         &self,
         fields: DateFields,
@@ -143,19 +159,24 @@ impl Calendar for Ethiopian {
         Coptic.days_in_month(&date.0)
     }
 
-    fn offset_date(&self, date: &mut Self::DateInner, offset: DateDuration) {
-        Coptic.offset_date(&mut date.0, offset);
+    fn add(
+        &self,
+        date: &Self::DateInner,
+        duration: types::DateDuration,
+        options: DateAddOptions,
+    ) -> Result<Self::DateInner, DateError> {
+        Coptic
+            .add(&date.0, duration, options)
+            .map(EthiopianDateInner)
     }
 
     fn until(
         &self,
         date1: &Self::DateInner,
         date2: &Self::DateInner,
-        _calendar2: &Self,
-        largest_unit: DateDurationUnit,
-        smallest_unit: DateDurationUnit,
-    ) -> DateDuration {
-        Coptic.until(&date1.0, &date2.0, &Coptic, largest_unit, smallest_unit)
+        options: DateDifferenceOptions,
+    ) -> Result<types::DateDuration, Self::DifferenceError> {
+        Coptic.until(&date1.0, &date2.0, options)
     }
 
     fn year_info(&self, date: &Self::DateInner) -> Self::Year {
